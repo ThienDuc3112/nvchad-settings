@@ -1,7 +1,7 @@
 return {
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
+    event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
   },
 
@@ -12,6 +12,18 @@ return {
       require "configs.lspconfig"
     end,
   },
+
+
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = { "kevinhwang91/promise-async" },
+    opts = {
+      provider_selector = function(bufnr, filetype, buftype)
+        return { 'treesitter', 'indent' }
+      end
+    }
+  },
+
   --
   -- {
   --   "L3MON4D3/LuaSnip",
@@ -22,13 +34,16 @@ return {
   --   end,
   -- },
 
-  -- {
-  -- 	"nvim-treesitter/nvim-treesitter",
-  -- 	opts = {
-  -- 		ensure_installed = {
-  -- 			"vim", "lua", "vimdoc",
-  --      "html", "css"
-  -- 		},
-  -- 	},
-  -- },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "vim", "lua", "vimdoc",
+        "html", "css", "typescript", "go", "javascript"
+      },
+      highlight = {
+        enable = true,
+      },
+    },
+  },
 }
