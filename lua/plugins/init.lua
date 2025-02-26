@@ -21,7 +21,14 @@ return {
       provider_selector = function(bufnr, filetype, buftype)
         return { 'treesitter', 'indent' }
       end
-    }
+    },
+  },
+
+  {
+    "lewis6991/gitsigns.nvim",
+    opts = {
+      current_line_blame = true
+    },
   },
 
   --
