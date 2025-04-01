@@ -31,16 +31,6 @@ return {
     },
   },
 
-  --
-  -- {
-  --   "L3MON4D3/LuaSnip",
-  --   config = function()
-  --     require("luasnip.loaders.from_vscode").lazy_load {
-  --       paths = "~/.config/nvim/snippets",
-  --     }
-  --   end,
-  -- },
-
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
@@ -53,4 +43,57 @@ return {
       },
     },
   },
+
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "clangd",
+        "clang-format",
+        "gopls",
+        "codelldb",
+        "typescript-language-server",
+      }
+    }
+  },
+
+  {
+    "mfussenegger/nvim-dap",
+  },
+
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "mfussenegger/nvim-dap",
+    },
+    opts = {
+      handlers = {}
+    },
+  },
+
+  {
+    "rcarriga/nvim-dap-ui",
+    event = "VeryLazy",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "nvim-neotest/nvim-nio"
+    },
+    config = function()
+      local dap, dapui = require("dap"), require("dapui")
+      dapui.setup()
+      dap.listeners.after.event_initialized.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated.dapui_config = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited.dapui_config = function()
+        dapui.close()
+      end
+    end
+
+  },
+
 }
