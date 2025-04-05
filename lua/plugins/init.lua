@@ -48,11 +48,16 @@ return {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
+        "html-lsp",
+        "css-lsp",
+        "typescript-language-server",
+        "tailwindcss-language-server",
         "clangd",
         "clang-format",
-        "gopls",
         "codelldb",
-        "typescript-language-server",
+        "gopls",
+        "rust-analyzer",
+        "python-lsp-server",
       }
     }
   },
