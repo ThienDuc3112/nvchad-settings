@@ -1,7 +1,7 @@
 return {
   {
     "stevearc/conform.nvim",
-    event = 'BufWritePre', -- uncomment for format on save
+    event = "BufWritePre", -- uncomment for format on save
     opts = require "configs.conform",
   },
 
@@ -13,21 +13,20 @@ return {
     end,
   },
 
-
   {
     "kevinhwang91/nvim-ufo",
     dependencies = { "kevinhwang91/promise-async" },
     opts = {
       provider_selector = function(bufnr, filetype, buftype)
-        return { 'treesitter', 'indent' }
-      end
+        return { "treesitter", "indent" }
+      end,
     },
   },
 
   {
     "lewis6991/gitsigns.nvim",
     opts = {
-      current_line_blame = true
+      current_line_blame = true,
     },
   },
 
@@ -35,8 +34,14 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
-        "vim", "lua", "vimdoc",
-        "html", "css", "typescript", "go", "javascript"
+        "vim",
+        "lua",
+        "vimdoc",
+        "html",
+        "css",
+        "typescript",
+        "go",
+        "javascript",
       },
       highlight = {
         enable = true,
@@ -58,8 +63,9 @@ return {
         "gopls",
         "rust-analyzer",
         "python-lsp-server",
-      }
-    }
+        "json-lsp",
+      },
+    },
   },
 
   {
@@ -74,7 +80,7 @@ return {
       "mfussenegger/nvim-dap",
     },
     opts = {
-      handlers = {}
+      handlers = {},
     },
   },
 
@@ -83,10 +89,10 @@ return {
     event = "VeryLazy",
     dependencies = {
       "mfussenegger/nvim-dap",
-      "nvim-neotest/nvim-nio"
+      "nvim-neotest/nvim-nio",
     },
     config = function()
-      local dap, dapui = require("dap"), require("dapui")
+      local dap, dapui = require "dap", require "dapui"
       dapui.setup()
       dap.listeners.after.event_initialized.dapui_config = function()
         dapui.open()
@@ -97,8 +103,27 @@ return {
       dap.listeners.before.event_exited.dapui_config = function()
         dapui.close()
       end
-    end
-
+    end,
   },
 
+  { "b0o/schemastore.nvim" },
+
+  {
+    "christoomey/vim-tmux-navigator",
+    cmd = {
+      "TmuxNavigateLeft",
+      "TmuxNavigateDown",
+      "TmuxNavigateUp",
+      "TmuxNavigateRight",
+      "TmuxNavigatePrevious",
+      "TmuxNavigatorProcessList",
+    },
+    keys = {
+      { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+      { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+      { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+      { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+      { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+    },
+  },
 }
